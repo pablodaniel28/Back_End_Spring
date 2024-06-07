@@ -28,7 +28,7 @@ public class MateriaController {
     }
 
     @PostMapping
-    public Materia createMateria(@RequestBody Materia materia) {
+    public Materia createMateria(@RequestBody    Materia materia) {
         return materiaService.createMateria(materia);
     }
 
