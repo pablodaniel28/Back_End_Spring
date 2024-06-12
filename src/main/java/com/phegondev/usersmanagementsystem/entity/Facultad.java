@@ -1,9 +1,10 @@
 package com.phegondev.usersmanagementsystem.entity;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "facultad")
+@Table(name = "facultades")
 @Data
 public class Facultad {
 
@@ -16,5 +17,5 @@ public class Facultad {
 
     @Column(nullable = false, unique = true)
     private String nombre;
-
 }
+
