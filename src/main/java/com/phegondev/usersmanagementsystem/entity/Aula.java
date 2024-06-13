@@ -22,9 +22,10 @@ public class Aula {
     public Aula() {
     }
 
-    public Aula(Integer id, String nombre) {
+    public Aula(Integer id, String nombre,Modulo modulo) {
         this.id = id;
         this.nombre = nombre;
+        this.modulo=modulo;
     }
 
     // Getters and setters
@@ -42,6 +43,14 @@ public class Aula {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Modulo getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(Modulo modulo) {
+        this.modulo = modulo;
     }
 
 
