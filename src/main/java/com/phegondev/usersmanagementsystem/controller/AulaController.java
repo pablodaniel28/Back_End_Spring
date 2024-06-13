@@ -28,13 +28,13 @@ public class AulaController {
     }
 
     @PostMapping
-    public Aula createAula(@RequestBody Aula aula) {
-        return aulaService.createAula(aula);
+    public Aula createAula(@RequestBody Aula aula, @RequestParam Integer moduloId) {
+        return aulaService.createAula(aula, moduloId);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Aula> updateAula(@PathVariable Integer id, @RequestBody Aula aulaDetails) {
-        Optional<Aula> aula = aulaService.updateAula(id, aulaDetails);
+    public ResponseEntity<Aula> updateAula(@PathVariable Integer id, @RequestBody Aula aulaDetails, @RequestParam Integer moduloId) {
+        Optional<Aula> aula = aulaService.updateAula(id, aulaDetails, moduloId);
         return aula.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
