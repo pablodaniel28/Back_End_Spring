@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/modulos/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/facultades/**").hasAnyAuthority("ADMIN")
                          .requestMatchers("/carreras/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/api/users/**").hasAnyAuthority("ADMIN","USER")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
