@@ -18,7 +18,8 @@ public class Carrera {
     @Column(nullable = false)
     private String nombre;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "facultad_id", nullable = false)
     private Facultad facultad;
+
 }

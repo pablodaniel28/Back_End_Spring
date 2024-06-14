@@ -18,4 +18,3 @@ public class Facultad {
     @Column(nullable = false, unique = true)
     private String nombre;
 }
-

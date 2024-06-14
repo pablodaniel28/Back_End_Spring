@@ -21,6 +21,7 @@ public class CarreraController {
         return carreraService.getAllCarreras();
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Carrera> getCarreraById(@PathVariable Integer id) {
         Optional<Carrera> carrera = carreraService.getCarreraById(id);
