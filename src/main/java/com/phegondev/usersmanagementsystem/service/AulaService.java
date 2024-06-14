@@ -33,11 +33,9 @@ public class AulaService {
         return aulaRepository.save(aula);
     }
 
-    public Optional<Aula> updateAula(Integer id, Aula aulaDetails, Integer moduloId) {
+    public Optional<Aula> updateAula(Integer id, Aula aulaDetails) {
         return aulaRepository.findById(id).map(aula -> {
-            Modulo modulo = moduloRepository.findById(moduloId).orElseThrow(() -> new RuntimeException("Modulo not found"));
             aula.setNombre(aulaDetails.getNombre());
-            aula.setModulo(modulo);
             return aulaRepository.save(aula);
         });
     }

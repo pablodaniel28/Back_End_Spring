@@ -16,9 +16,19 @@ public class AulaController {
     @Autowired
     private AulaService aulaService;
 
+//    @GetMapping
+//    public List<Aula> getAllAulas() {
+//        return aulaService.getAllAulas();
+//    }
+
     @GetMapping
     public List<Aula> getAllAulas() {
-        return aulaService.getAllAulas();
+        List<Aula> aulas = aulaService.getAllAulas();
+        // Force loading the modulo in each aula
+        for (Aula aula : aulas) {
+            aula.setModulo(aula.getModulo());
+        }
+        return aulas;
     }
 
     @GetMapping("/{id}")
@@ -33,8 +43,8 @@ public class AulaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Aula> updateAula(@PathVariable Integer id, @RequestBody Aula aulaDetails, @RequestParam Integer moduloId) {
-        Optional<Aula> aula = aulaService.updateAula(id, aulaDetails, moduloId);
+    public ResponseEntity<Aula> updateAula(@PathVariable Integer id, @RequestBody Aula aulaDetails) {
+        Optional<Aula> aula = aulaService.updateAula(id, aulaDetails);
         return aula.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
