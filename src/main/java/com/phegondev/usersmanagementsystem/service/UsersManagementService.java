@@ -1,10 +1,8 @@
 package com.phegondev.usersmanagementsystem.service;
 
-import com.phegondev.usersmanagementsystem.config.JWTAuthFilter;
 import com.phegondev.usersmanagementsystem.dto.ReqRes;
 import com.phegondev.usersmanagementsystem.entity.OurUsers;
 import com.phegondev.usersmanagementsystem.repository.UsersRepo;
-import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,7 +32,6 @@ public class UsersManagementService {
         try {
             OurUsers ourUser = new OurUsers();
             ourUser.setEmail(registrationRequest.getEmail());
-            ourUser.setCity(registrationRequest.getCity());
             ourUser.setRole(registrationRequest.getRole());
             ourUser.setName(registrationRequest.getName());
             ourUser.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
@@ -168,7 +165,6 @@ public class UsersManagementService {
                 OurUsers existingUser = userOptional.get();
                 existingUser.setEmail(updatedUser.getEmail());
                 existingUser.setName(updatedUser.getName());
-                existingUser.setCity(updatedUser.getCity());
                 existingUser.setRole(updatedUser.getRole());
 
                 // Check if password is present in the request

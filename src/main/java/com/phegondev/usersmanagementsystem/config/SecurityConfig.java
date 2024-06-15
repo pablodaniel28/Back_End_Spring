@@ -30,19 +30,28 @@ public class SecurityConfig {
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(request-> request.requestMatchers("/auth/**", "/public/**").permitAll()
-                        .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/user/**").hasAnyAuthority("USER")
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/user/**").hasAuthority("USER")
                         .requestMatchers("/adminuser/**").hasAnyAuthority("ADMIN", "USER")
-                        .requestMatchers("/materias/**").hasAnyAuthority("ADMIN")  // Allow both ADMIN and USER to access /materias/**
+                        .requestMatchers("/materias/**").hasAuthority("ADMIN")
+                        .requestMatchers("/docentes/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/aulas/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/modulos/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/facultades/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/horarios/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/asistencias/**").hasAnyAuthority("ADMIN")
+                         .requestMatchers("/carreras/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/api/users/**").hasAnyAuthority("ADMIN","USER")
                         .anyRequest().authenticated())
-                .sessionManagement(manager->manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider()).addFilterBefore(
-                        jwtAuthFilter, UsernamePasswordAuthenticationFilter.class
-                );
+                .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
         return httpSecurity.build();
     }
     @Bean

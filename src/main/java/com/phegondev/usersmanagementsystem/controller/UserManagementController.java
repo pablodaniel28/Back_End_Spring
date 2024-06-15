@@ -32,7 +32,6 @@ public class UserManagementController {
     @GetMapping("/admin/get-all-users")
     public ResponseEntity<ReqRes> getAllUsers(){
         return ResponseEntity.ok(usersManagementService.getAllUsers());
-
     }
 
     @GetMapping("/admin/get-users/{userId}")
@@ -41,8 +40,19 @@ public class UserManagementController {
 
     }
 
+    @GetMapping("/adminuser/get-users/{userId}")
+    public ResponseEntity<ReqRes> getUSerByID2(@PathVariable Integer userId){
+        return ResponseEntity.ok(usersManagementService.getUsersById(userId));
+
+    }
+
     @PutMapping("/admin/update/{userId}")
     public ResponseEntity<ReqRes> updateUser(@PathVariable Integer userId, @RequestBody OurUsers reqres){
+        return ResponseEntity.ok(usersManagementService.updateUser(userId, reqres));
+    }
+
+    @PutMapping("/adminuser/update/{userId}")
+    public ResponseEntity<ReqRes> updateUser2(@PathVariable Integer userId, @RequestBody OurUsers reqres){
         return ResponseEntity.ok(usersManagementService.updateUser(userId, reqres));
     }
 

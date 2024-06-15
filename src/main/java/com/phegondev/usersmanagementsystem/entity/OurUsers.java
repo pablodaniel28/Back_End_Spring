@@ -21,8 +21,9 @@ public class OurUsers implements UserDetails {
     private String email;
     private String name;
     private String password;
-    private String city;
+    @Column(nullable = true)
     private String role;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
