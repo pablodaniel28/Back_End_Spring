@@ -44,7 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/modulos/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/facultades/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/horarios/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/asistencia/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/asistencias/**").hasAnyAuthority("ADMIN")
                          .requestMatchers("/carreras/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/api/users/**").hasAnyAuthority("ADMIN","USER")
                         .anyRequest().authenticated())

@@ -38,5 +38,4 @@ public class Grupo { // Cambio de Carrera a Grupo
     @JoinColumn(name = "sistemaacademico_id", nullable = false)
     private Sistemaacademico sistemaacademico;
 
-
 }
