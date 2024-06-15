@@ -84,18 +84,8 @@
 
 package com.phegondev.usersmanagementsystem.service;
 
-import com.phegondev.usersmanagementsystem.entity.Grupo;
-import com.phegondev.usersmanagementsystem.entity.Carrera;
-import com.phegondev.usersmanagementsystem.entity.Gestion;
-import com.phegondev.usersmanagementsystem.entity.Materia;
-import com.phegondev.usersmanagementsystem.entity.OurUsers;
-import com.phegondev.usersmanagementsystem.entity.Sistemaacademico;
-import com.phegondev.usersmanagementsystem.repository.GrupoRepository;
-import com.phegondev.usersmanagementsystem.repository.CarreraRepository;
-import com.phegondev.usersmanagementsystem.repository.GestionRepository;
-import com.phegondev.usersmanagementsystem.repository.MateriaRepository;
-import com.phegondev.usersmanagementsystem.repository.UsersRepo;
-import com.phegondev.usersmanagementsystem.repository.SistemaacademicoRepository;
+import com.phegondev.usersmanagementsystem.entity.*;
+import com.phegondev.usersmanagementsystem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -122,6 +112,9 @@ public class GrupoService {
 
     @Autowired
     private SistemaacademicoRepository sistemaacademicoRepository;
+
+    @Autowired
+    private HorarioRepository horarioRepository;
 
     public List<Grupo> getAllGrupos() {
         return grupoRepository.findAll();
@@ -157,6 +150,11 @@ public class GrupoService {
             sistemaacademicoOptional.ifPresent(grupo::setSistemaacademico);
         }
 
+        if (grupo.getHorario() != null && grupo.getHorario().getId() != null) {
+            Optional<Horario> horarioOptional = horarioRepository.findById(grupo.getHorario().getId());
+            horarioOptional.ifPresent(grupo::setHorario);
+        }
+
         return grupoRepository.save(grupo);
     }
 
@@ -190,6 +188,11 @@ public class GrupoService {
             if (grupoDetails.getSistemaacademico() != null && grupoDetails.getSistemaacademico().getId() != null) {
                 Optional<Sistemaacademico> sistemaacademicoOptional = sistemaacademicoRepository.findById(grupoDetails.getSistemaacademico().getId());
                 sistemaacademicoOptional.ifPresent(grupoToUpdate::setSistemaacademico);
+            }
+
+            if (grupoDetails.getHorario() != null && grupoDetails.getHorario().getId() != null) {
+                Optional<Horario> horarioOptional = horarioRepository.findById(grupoDetails.getHorario().getId());
+                horarioOptional.ifPresent(grupoToUpdate::setHorario);
             }
 
             return Optional.of(grupoRepository.save(grupoToUpdate));
