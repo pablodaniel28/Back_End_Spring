@@ -28,6 +28,12 @@ public class Asistencia {
     @Column(nullable = false)
     private String estado;
 
+    @Column(nullable = false)
+    private Double latitud; // Nuevo campo
+
+    @Column(nullable = false)
+    private Double longitud; // Nuevo campo
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "grupo_id", nullable = true)
     private Grupo grupo;
