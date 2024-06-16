@@ -44,6 +44,8 @@ public class AsistenciaService {
             asistenciaToUpdate.setFecha(asistenciaDetails.getFecha());
             asistenciaToUpdate.setTiempo(asistenciaDetails.getTiempo());
             asistenciaToUpdate.setEstado(asistenciaDetails.getEstado());
+            asistenciaToUpdate.setLatitud(asistenciaDetails.getLatitud());
+            asistenciaToUpdate.setLongitud(asistenciaDetails.getLongitud());
             if (asistenciaDetails.getGrupo() != null && asistenciaDetails.getGrupo().getId() != null) {
                 Optional<Grupo> grupoOptional = grupoRepository.findById(asistenciaDetails.getGrupo().getId());
                 grupoOptional.ifPresent(asistenciaToUpdate::setGrupo);
