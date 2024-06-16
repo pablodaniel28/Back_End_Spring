@@ -31,13 +31,7 @@ public class GrupoController {
     public Grupo createGrupo(@RequestBody Grupo grupo) {
         return grupoService.createGrupo(grupo);
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Grupo> updateGrupo(@PathVariable Integer id, @RequestBody Grupo grupoDetails) {
-        Optional<Grupo> grupo = grupoService.updateGrupo(id, grupoDetails);
-        return grupo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGrupo(@PathVariable Integer id) {
         if (grupoService.getGrupoById(id).isPresent()) {
@@ -48,3 +42,4 @@ public class GrupoController {
         }
     }
 }
+
