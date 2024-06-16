@@ -29,6 +29,7 @@ public class GrupoService {
     @Autowired
     private SistemaacademicoRepository sistemaacademicoRepository;
 
+
     public List<Grupo> getAllGrupos() {
         return grupoRepository.findAll();
     }
@@ -53,11 +54,54 @@ public class GrupoService {
         Optional<OurUsers> ourUsersOptional = usersRepo.findById(grupo.getOurUsers().getId());
         ourUsersOptional.ifPresent(grupo::setOurUsers);
 
+
         Optional<Sistemaacademico> sistemaacademicoOptional = sistemaacademicoRepository.findById(grupo.getSistemaacademico().getId());
         sistemaacademicoOptional.ifPresent(grupo::setSistemaacademico);
 
+
         return grupoRepository.save(grupo);
 
+    }
+
+
+    public Optional<Grupo> updateGrupo(Integer id, Grupo grupoDetails) {
+        Optional<Grupo> grupo = grupoRepository.findById(id);
+        if (grupo.isPresent()) {
+            Grupo grupoToUpdate = grupo.get();
+            grupoToUpdate.setNombre(grupoDetails.getNombre());
+            grupoToUpdate.setCupo(grupoDetails.getCupo());
+
+            if (grupoDetails.getCarrera() != null && grupoDetails.getCarrera().getId() != null) {
+                Optional<Carrera> carreraOptional = carreraRepository.findById(grupoDetails.getCarrera().getId());
+                carreraOptional.ifPresent(grupoToUpdate::setCarrera);
+            }
+
+            if (grupoDetails.getGestion() != null && grupoDetails.getGestion().getId() != null) {
+                Optional<Gestion> gestionOptional = gestionRepository.findById(grupoDetails.getGestion().getId());
+                gestionOptional.ifPresent(grupoToUpdate::setGestion);
+            }
+
+            if (grupoDetails.getMateria() != null && grupoDetails.getMateria().getId() != null) {
+                Optional<Materia> materiaOptional = materiaRepository.findById(grupoDetails.getMateria().getId());
+                materiaOptional.ifPresent(grupoToUpdate::setMateria);
+            }
+
+            if (grupoDetails.getOurUsers() != null && grupoDetails.getOurUsers().getId() != null) {
+                Optional<OurUsers> ourUsersOptional = usersRepo.findById(grupoDetails.getOurUsers().getId());
+                ourUsersOptional.ifPresent(grupoToUpdate::setOurUsers);
+            }
+
+            if (grupoDetails.getSistemaacademico() != null && grupoDetails.getSistemaacademico().getId() != null) {
+                Optional<Sistemaacademico> sistemaacademicoOptional = sistemaacademicoRepository.findById(grupoDetails.getSistemaacademico().getId());
+                sistemaacademicoOptional.ifPresent(grupoToUpdate::setSistemaacademico);
+            }
+
+
+
+            return Optional.of(grupoRepository.save(grupoToUpdate));
+        } else {
+            return Optional.empty();
+        }
     }
 
 
