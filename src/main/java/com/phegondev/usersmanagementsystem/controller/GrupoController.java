@@ -31,7 +31,7 @@ public class GrupoController {
     public Grupo createGrupo(@RequestBody Grupo grupo) {
         return grupoService.createGrupo(grupo);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGrupo(@PathVariable Integer id) {
         if (grupoService.getGrupoById(id).isPresent()) {
