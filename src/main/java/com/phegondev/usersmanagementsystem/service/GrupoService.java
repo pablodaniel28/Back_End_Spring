@@ -113,8 +113,7 @@ public class GrupoService {
     @Autowired
     private SistemaacademicoRepository sistemaacademicoRepository;
 
-    @Autowired
-    private HorarioRepository horarioRepository;
+
 
     public List<Grupo> getAllGrupos() {
         return grupoRepository.findAll();
@@ -150,10 +149,7 @@ public class GrupoService {
             sistemaacademicoOptional.ifPresent(grupo::setSistemaacademico);
         }
 
-        if (grupo.getHorario() != null && grupo.getHorario().getId() != null) {
-            Optional<Horario> horarioOptional = horarioRepository.findById(grupo.getHorario().getId());
-            horarioOptional.ifPresent(grupo::setHorario);
-        }
+
 
         return grupoRepository.save(grupo);
     }
@@ -190,10 +186,7 @@ public class GrupoService {
                 sistemaacademicoOptional.ifPresent(grupoToUpdate::setSistemaacademico);
             }
 
-            if (grupoDetails.getHorario() != null && grupoDetails.getHorario().getId() != null) {
-                Optional<Horario> horarioOptional = horarioRepository.findById(grupoDetails.getHorario().getId());
-                horarioOptional.ifPresent(grupoToUpdate::setHorario);
-            }
+
 
             return Optional.of(grupoRepository.save(grupoToUpdate));
         } else {

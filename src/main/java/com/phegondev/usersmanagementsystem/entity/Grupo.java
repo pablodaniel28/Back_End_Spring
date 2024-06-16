@@ -38,8 +38,6 @@ public class Grupo { // Cambio de Carrera a Grupo
     @JoinColumn(name = "sistemaacademico_id", nullable = false)
     private Sistemaacademico sistemaacademico;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "horario_id", nullable = false)
-    private Horario horario;
+
 
 }
