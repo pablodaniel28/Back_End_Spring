@@ -15,7 +15,7 @@ public class Grupo { // Cambio de Carrera a Grupo
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Integer cupo;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
@@ -37,7 +37,5 @@ public class Grupo { // Cambio de Carrera a Grupo
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "sistemaacademico_id", nullable = false)
     private Sistemaacademico sistemaacademico;
-
-
 
 }

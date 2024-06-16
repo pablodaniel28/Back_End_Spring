@@ -15,6 +15,12 @@ public class Facultad {
     @Column(nullable = false, unique = true)
     private String codigo;
 
+    @Column(nullable = false)
+    private Double latitud; // Nuevo campo
+
+    @Column(nullable = false)
+    private Double longitud; // Nuevo campo
+
     @Column(nullable = false, unique = true)
     private String nombre;
 }
