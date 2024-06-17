@@ -17,6 +17,11 @@ public class Modulo {
 
     @Column(nullable = false, unique = true)
     private String nro;
+    @Column(nullable = false)
+    private Double latitud; // Nuevo campo
+
+    @Column(nullable = false)
+    private Double longitud; // Nuevo campo
 
     public Modulo() {
     }

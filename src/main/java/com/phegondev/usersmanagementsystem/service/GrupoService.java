@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.ArrayList;
 
 @Service
 public class GrupoService {
@@ -30,6 +31,84 @@ public class GrupoService {
     private SistemaacademicoRepository sistemaacademicoRepository;
 
 
+    @Autowired
+    private HorarioRepository horarioRepository;
+
+    // Otros métodos...
+
+    public List<Grupo> getGruposByOurUsersId(Integer ourUsersId) {
+        return grupoRepository.findByOurUsersId(ourUsersId);
+    }
+
+    public List<GrupoHorarioDTO> getGrupoHorariosByOurUsersId(Integer ourUsersId) {
+        List<Grupo> grupos = getGruposByOurUsersId(ourUsersId);
+        List<GrupoHorarioDTO> grupoHorariosDTOList = new ArrayList<>();
+
+        for (Grupo grupo : grupos) {
+            GrupoHorarioDTO grupoHorarioDTO = new GrupoHorarioDTO();
+            grupoHorarioDTO.setId(grupo.getId());
+            grupoHorarioDTO.setNombre(grupo.getNombre());
+            grupoHorarioDTO.setCupo(grupo.getCupo());
+            grupoHorarioDTO.setCarreraNombre(grupo.getCarrera().getNombre());
+            grupoHorarioDTO.setGestionNombre(grupo.getGestion().getNombre());
+            grupoHorarioDTO.setMateriaNombre(grupo.getMateria().getNombre());
+            grupoHorarioDTO.setOurUsersNombre(grupo.getOurUsers().getName());
+            grupoHorarioDTO.setSistemaacademicoNombre(grupo.getSistemaacademico().getNombre());
+
+            List<Horario> horarios = horarioRepository.findByGrupoId(grupo.getId());
+            List<GrupoHorarioDTO.HorarioInfo> horarioInfos = new ArrayList<>();
+
+            for (Horario horario : horarios) {
+                GrupoHorarioDTO.HorarioInfo horarioInfo = new GrupoHorarioDTO.HorarioInfo();
+                horarioInfo.setDia(horario.getDia());
+                horarioInfo.setHorainicio(horario.getHorainicio());
+                horarioInfo.setHorafin(horario.getHorafin());
+                horarioInfo.setAulaNombre(horario.getAula().getNombre());
+                horarioInfo.setModuloLatitud(horario.getAula().getModulo().getLatitud());
+                horarioInfo.setModuloLongitud(horario.getAula().getModulo().getLongitud());
+                horarioInfos.add(horarioInfo);
+            }
+
+            grupoHorarioDTO.setHorarios(horarioInfos);
+            grupoHorariosDTOList.add(grupoHorarioDTO);
+        }
+
+        return grupoHorariosDTOList;
+    }
+
+//    public List<GrupoHorarioDTO> getGrupoHorariosByOurUsersId(Integer ourUsersId) {
+//        List<Grupo> grupos = getGruposByOurUsersId(ourUsersId);
+//        List<GrupoHorarioDTO> grupoHorariosDTOList = new ArrayList<>();
+//
+//        for (Grupo grupo : grupos) {
+//            GrupoHorarioDTO grupoHorarioDTO = new GrupoHorarioDTO();
+//            grupoHorarioDTO.setId(grupo.getId());
+//            grupoHorarioDTO.setNombre(grupo.getNombre());
+//            grupoHorarioDTO.setCupo(grupo.getCupo());
+//            grupoHorarioDTO.setCarreraNombre(grupo.getCarrera().getNombre());
+//            grupoHorarioDTO.setGestionNombre(grupo.getGestion().getNombre());
+//            grupoHorarioDTO.setMateriaNombre(grupo.getMateria().getNombre());
+//            grupoHorarioDTO.setOurUsersNombre(grupo.getOurUsers().getName());
+//            grupoHorarioDTO.setSistemaacademicoNombre(grupo.getSistemaacademico().getNombre());
+//
+//            List<Horario> horarios = horarioRepository.findByGrupoId(grupo.getId());
+//            List<GrupoHorarioDTO.HorarioInfo> horarioInfos = new ArrayList<>();
+//
+//            for (Horario horario : horarios) {
+//                GrupoHorarioDTO.HorarioInfo horarioInfo = new GrupoHorarioDTO.HorarioInfo();
+//                horarioInfo.setDia(horario.getDia());
+//                horarioInfo.setHorainicio(horario.getHorainicio());
+//                horarioInfo.setHorafin(horario.getHorafin());
+//                horarioInfos.add(horarioInfo);
+//            }
+//
+//            grupoHorarioDTO.setHorarios(horarioInfos);
+//            grupoHorariosDTOList.add(grupoHorarioDTO);
+//        }
+//
+//        return grupoHorariosDTOList;
+//    }
+
     public List<Grupo> getAllGrupos() {
         return grupoRepository.findAll();
     }
@@ -39,6 +118,9 @@ public class GrupoService {
     }
 
 
+//    public List<Grupo> getGruposByOurUsersId(Integer ourUsersId) {
+//        return grupoRepository.findByOurUsersId(ourUsersId);
+//    }
 
     public Grupo createGrupo(Grupo grupo) {
 

@@ -35,6 +35,11 @@ public class OurUsers implements UserDetails {
         return email;
     }
 
+//    @Override
+//    public String getPassword() {
+//        return password;
+//    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -54,4 +59,23 @@ public class OurUsers implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+//    // Otros atributos y métodos...
+//
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
+
+//    public String getNombre() {
+//        return name;
+//    }
+//
+//    public void setNombre(String name) {
+//        this.name = name;
+//    }
 }
