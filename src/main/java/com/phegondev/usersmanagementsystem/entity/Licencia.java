@@ -26,4 +26,8 @@ public class Licencia {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "grupo_id", nullable = true)
     private Grupo grupo;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "ourUsers_id", nullable = false)
+    private OurUsers ourUsers;
 }
