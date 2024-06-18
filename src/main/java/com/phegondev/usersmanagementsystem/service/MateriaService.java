@@ -30,6 +30,7 @@ public class MateriaService {
         return materiaRepository.findById(id).map(materia -> {
             materia.setNombre(materiaDetails.getNombre());
             materia.setSigla(materiaDetails.getSigla());
+            materia.setSemestre(materiaDetails.getSemestre());
             return materiaRepository.save(materia);
         });
     }
