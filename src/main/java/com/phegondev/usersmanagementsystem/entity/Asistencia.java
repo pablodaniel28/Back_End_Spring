@@ -38,6 +38,4 @@ public class Asistencia {
     @JoinColumn(name = "grupo_id", nullable = true)
     private Grupo grupo;
 
-    public Asistencia() {
-    }
 }
