@@ -18,13 +18,17 @@ public class Materia {
     @Column(nullable = false, unique = true)
     private String sigla;
 
+    @Column(nullable = false)
+    private String semestre;
+
     public Materia() {
     }
 
-    public Materia(Integer id, String nombre, String sigla) {
+    public Materia(Integer id, String nombre, String sigla, String semestre) {
         this.id = id;
         this.nombre = nombre;
         this.sigla = sigla;
+        this.semestre = semestre;
     }
 
     public Integer getId() {
@@ -49,6 +53,14 @@ public class Materia {
 
     public void setSigla(String sigla) {
         this.sigla = sigla;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 }
 
