@@ -34,11 +34,18 @@ public class GrupoService {
     @Autowired
     private HorarioRepository horarioRepository;
 
+
+
+    @Autowired
+    private AsistenciaRepository asistenciaRepository;
+
     // Otros métodos...
 
     public List<Grupo> getGruposByOurUsersId(Integer ourUsersId) {
-        return grupoRepository.findByOurUsersId(ourUsersId);
+       return grupoRepository.findByOurUsersId(ourUsersId);
     }
+
+
 
     public List<GrupoHorarioDTO> getGrupoHorariosByOurUsersId(Integer ourUsersId) {
         List<Grupo> grupos = getGruposByOurUsersId(ourUsersId);

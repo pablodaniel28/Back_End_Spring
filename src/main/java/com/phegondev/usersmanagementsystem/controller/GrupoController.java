@@ -1,6 +1,7 @@
 package com.phegondev.usersmanagementsystem.controller;
 
 import com.phegondev.usersmanagementsystem.entity.Grupo;
+import com.phegondev.usersmanagementsystem.repository.AsistenciaRepository;
 import com.phegondev.usersmanagementsystem.service.GrupoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.phegondev.usersmanagementsystem.entity.GrupoHorarioDTO;
@@ -16,6 +17,7 @@ public class GrupoController {
 
     @Autowired
     private GrupoService grupoService;
+    private AsistenciaRepository asistenciaRepository;
 
     @GetMapping
     public List<Grupo> getAllGrupos() {

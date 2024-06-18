@@ -3,6 +3,8 @@ package com.phegondev.usersmanagementsystem.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "grupos") // Cambio de carreras a grupos
 @Data
@@ -37,5 +39,9 @@ public class Grupo { // Cambio de Carrera a Grupo
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "sistemaacademico_id", nullable = false)
     private Sistemaacademico sistemaacademico;
+
+
+
+
 
 }
