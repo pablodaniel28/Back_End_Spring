@@ -37,4 +37,7 @@ public class Asistencia {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "grupo_id", nullable = true)
     private Grupo grupo;
+
+    public Asistencia() {
+    }
 }
